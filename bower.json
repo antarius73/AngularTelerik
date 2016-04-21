@@ -1,0 +1,30 @@
+{
+  "name": "kendo-test",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-animate": "^1.4.0",
+    "angular-cookies": "^1.4.0",
+    "angular-resource": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "angular-sanitize": "^1.4.0",
+    "angular-touch": "^1.4.0",
+    "kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#^2016.1.412+SP3"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.0"
+  },
+  "appPath": "app",
+  "moduleName": "kendoTestApp",
+
+  "overrides":{
+    "kendo-ui":{
+    "main":[
+     "js/kendo.all.min.js",
+      "styles/kendo.common.min.css",
+      "styles/kendo.default.min.css"
+    ]
+  }
+  }
+
+}
