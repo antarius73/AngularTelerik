@@ -18,7 +18,9 @@ angular
     'ngTouch',
     'kendo.directives'
   ])
-  .config(function ($routeProvider) {
+    .constant('WCF_URL_BASE', 'https://svr-grind.tesfri.intra:8081')
+
+    .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -29,6 +31,16 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
+      })
+      .when('/persons/personsList', {
+        templateUrl: 'views/persons/personslist.html',
+        controller: 'PersonsPersonslistCtrl',
+        controllerAs: 'persons/personsList'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginController',
+        controllerAs: 'login'
       })
       .otherwise({
         redirectTo: '/'
