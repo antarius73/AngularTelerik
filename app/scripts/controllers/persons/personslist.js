@@ -10,74 +10,46 @@
 angular.module('kendoTestApp')
   .controller('PersonsPersonslistCtrl', function ($resource, $scope, $rootScope,
                                                   Persons, Person, AuthenticationService, $location) {
-      // charge la liste des personnes
-      $scope.searchData = function () {
-
-          Persons.query().$promise.then(function (persons) {
-              //$scope.persons = persons.slice(Math.max(persons.length - 200, 1));
-
-              var dataSource = new kendo.data.DataSource({
-                  data:persons
-
-              });
-              dataSource.read();
-              $scope.personsSource.data(dataSource.data());
-
-          }, function (error) {
-              if (error.status === "401") {
-                  AuthenticationService.ClearCredentials();
-                  $location.path('/login');
-              }
-          });
-
-      };
 
 
-      $scope.personsSource = new kendo.data.DataSource({
-
-          schema:{
-              model:{
-                  fields:{
-                      FirstName:{type:"string"},
-                      Id:{type:"number"},
-                      LastName:{type:"string"},
-                      ModifiedDateString:{type:"date"},
-                      Title:{type:"string"},
-                      TypeString:{type:"string"}
-                  }
-              }
-          },
-          pageSize: 20
-
-      });
-
-
-
-      $scope.mainGridOptions = {
-          dataSource: $scope.personsSource,
-          columns: [{title: 'Id', width:'120px' , type:'number'},
-                    {title: 'firstname' , width:'120px', type:'string'},
-                    {title: 'LastName' , width:'120px', type:'string'},
-                    {title: 'ModifiedDateString' , width:'120px', type:'date'}],
-          sortable: true,
-          pageable:{
-
-              pageSizes:[10,20,100,500],
-              buttonCount:5
-
-
-          },
-          scrollable:true
-
-
-      };
-
-
-
-// test 2
 
       $scope.mainGridOptions2 = {
-          dataSource: $scope.personsSource,
+          dataSource: {
+              type:"json",
+              transport: {
+                  read:
+                  function(e){
+                          Persons.query().$promise.then(function (persons) {
+                              $scope.persons = persons.slice(Math.max(persons.length - 200, 1));
+                              e.success($scope.persons);
+                          });
+                      }
+              },
+              schema: {
+                  model: {
+                      fields: {
+                          FirstName: {type: "string"},
+                          Id: {type: "number"},
+                          LastName: {type: "string"},
+                          ModifiedDateString: {type: "date"},
+                          Title: {type: "string"},
+                          TypeString: {type: "string"}
+                      }
+                  }, parse: function (data) {
+                      $.each(data, function (i, val) {
+                          val.ModifiedDateString = new Date(val.ModifiedDateString);
+                          val.ModifiedDateString.setHours(0, 0, 0, 0);
+                          console.log(val.ModifiedDateString);
+                          console.log("toto");
+                      });
+                      return data;
+                  }
+              },
+              pageSize: 20,
+              serverPaging: false,
+              serverFiltering: false,
+              serverSorting: false
+          },
           columns: [
               {
                   field:'Id',
@@ -102,9 +74,18 @@ angular.module('kendoTestApp')
                   field:'ModifiedDateString',
                   title: 'ModifiedDateString' ,
                   width:'120px',
-                  template:'{{dataItem.ModifiedDateString|date:"dd/MM/yyyy"}}' ,
-                  type:'date',
-                  filterable:{ui:"datepicker"}
+                  format: "{0:MMM dd, yyyy}",
+                  parseFormats: "{0:MM/dd/yyyy}",
+                  headerTemplate: '<label for="check-all"><b>Start Date</b></label>',
+                  headerAttributes: { style: "text-align: center;" },
+                  attributes: { style: "text-align:center !important;padding-right: 25px;" },
+                  filterable: {
+                      ui: function (element) {
+                          element.kendoDatePicker({
+                              format: "MMM dd, yyyy"
+                          });
+                      }
+                  }
               }],
           sortable: true,
           pageable:{
@@ -121,7 +102,6 @@ angular.module('kendoTestApp')
 
 
 
-      $scope.searchData();
 
 
   });

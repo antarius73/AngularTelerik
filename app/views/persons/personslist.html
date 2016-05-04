@@ -7,23 +7,7 @@
 <div>
 
 
-    <div kendo-grid k-options="mainGridOptions" style="height: 600px">
 
-        <table>
-            <tr k-row-template data-uid="#: uid #">
-                <td style="text-align:right">{{dataItem.Id}}</td>
-                <td style="text-align:center">{{dataItem.Title}}&nbsp;{{dataItem.FirstName}}</td>
-                <td style="text-align:center">{{dataItem.LastName}}</td>
-                <td style="text-align:center">{{dataItem.ModifiedDateString|date:"dd/MM/yyyy"}}</td>
-            </tr>
-            <tr k-alt-row-template class="k-alt" data-uid="#: uid #">
-                <td style="text-align:right">{{dataItem.Id}}</td>
-                <td style="text-align:center">{{dataItem.Title}}&nbsp;{{dataItem.FirstName}}</td>
-                <td style="text-align:center">{{dataItem.LastName}}</td>
-                <td style="text-align:center">{{dataItem.ModifiedDateString|date:"dd/MM/yyyy"}}</td>
-            </tr>
-        </table>
-    </div>
 
 
 <br><br>

@@ -1,0 +1,11 @@
+
+
+
+<div class="language-select" >
+    <label>
+        Choisissez votre langage :
+        <select ng-model="selectLanguageData.languageSelect" ng-change="LanguageChanged()">
+            <option ng-repeat="option in selectLanguageData.availableOptions" value="{{option.id}}">{{option.name}}</option>
+        </select>
+        </label>
+    </div>

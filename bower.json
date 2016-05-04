@@ -21,6 +21,8 @@
     "kendo-ui": {
       "main": [
         "js/kendo.all.min.js",
+        "js/cultures/kendo.culture.fr-FR.min.js",
+        "js/cultures/kendo.culture.en-US.min.js",
         "styles/kendo.common.min.css",
         "styles/kendo.default.min.css"
       ]

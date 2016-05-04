@@ -45,6 +45,16 @@ angular
         controller: 'LoginController',
         controllerAs: 'login'
       })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl',
+        controllerAs: 'settings'
+      })
+      .when('/testDate', {
+        templateUrl: 'views/testdate.html',
+        controller: 'TestdateCtrl',
+        controllerAs: 'testDate'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -62,4 +72,29 @@ angular
                 $location.path('/login');
             }
         });
-    }]);
+    }])
+    .run(function(){
+
+
+        $.getScript("bower_components/kendo-ui/js/messages/kendo.messages.fr-FR.min.js", function() {
+
+            /* $scope.$apply should be used in order to notify the $scope for language change */
+
+
+                // $translate.use($scope.lang);
+                /* change angular-translate language */
+                kendo.culture("fr-FR");
+                /* change kendo culture */
+
+                /* we use dummy language option in order to force the Grid to rebind */
+                //$scope.mainGridOptions.language = $scope.lang;
+
+                /* we change the calendar widget culture option in order to force the Calendar to rebind */
+                // $scope.calendarOptions.culture = $scope.lang;
+
+            console.log(kendo.culture().name);
+        });
+
+
+    });
+
