@@ -76,7 +76,7 @@ angular
     .run(function(){
 
 
-        $.getScript("bower_components/kendo-ui/js/messages/kendo.messages.fr-FR.min.js", function() {
+        $.getScript("resources/kendo.messages.fr-FR.min.js", function() {
 
             /* $scope.$apply should be used in order to notify the $scope for language change */
 

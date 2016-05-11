@@ -22,7 +22,7 @@ angular.module('kendoTestApp')
 
       $scope.LanguageChanged = function(){
 
-          $.getScript("bower_components/kendo-ui/js/messages/kendo.messages." + $scope.selectLanguageData.languageSelect + ".min.js", function() {
+          $.getScript("resources/kendo.messages." + $scope.selectLanguageData.languageSelect + ".min.js", function() {
 
               /* $scope.$apply should be used in order to notify the $scope for language change */
               $scope.$apply(function () {

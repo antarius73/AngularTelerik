@@ -380,13 +380,24 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+            'resources/{,*/}*.*'
           ]
         }, {
           expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: 'bower_components/kendo-ui/styles',
+          dest: '<%= yeoman.dist %>/styles/',
+          src: 'Default/*'
+        }, {
+          expand: true,
+          cwd: 'bower_components/bootstrap/fonts',
+          dest: '<%= yeoman.dist %>/fonts/',
+          src: '*'
         }]
       },
       styles: {
